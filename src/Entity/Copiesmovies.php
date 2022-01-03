@@ -23,7 +23,7 @@ class Copiesmovies
     /**
      * @var string
      *
-     * @ORM\Column(name="ref", type="string", length=100, nullable=false, , unique=true)
+     * @ORM\Column(name="ref", type="string", length=100, nullable=false, unique=true)
      */
     private $ref;
 
