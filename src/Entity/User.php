@@ -4,13 +4,11 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -22,9 +20,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=30, unique=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string", length=20, unique=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=20, unique=true)
+     */
+    private $lastName1;
+
+    /**
+     * @ORM\Column(type="string", length=20, unique=true)
+     */
+    private $lastName2;
+
+    /**
+     * @ORM\Column(type="integer", length=10, unique=true)
+     */
+    private $phone;
 
     /**
      * @ORM\Column(type="json")
@@ -50,6 +68,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPhone(): ?int
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(int $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLastName1(): ?string
+    {
+        return $this->lastName1;
+    }
+
+    public function setLastName1(string $lastName1): self
+    {
+        $this->lastName1 = $lastName1;
+
+        return $this;
+    }
+
+    public function getLastName2(): ?string
+    {
+        return $this->lastName2;
+    }
+
+    public function setLastName2(string $lastName2): self
+    {
+        $this->lastName2 = $lastName2;
 
         return $this;
     }
