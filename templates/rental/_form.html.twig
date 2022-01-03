@@ -1,0 +1,14 @@
+
+{{ form_start(form) }}
+{{rental.idState.id}}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+{% block javascripts %}
+<script>
+
+    alert("want to return the movie?");
+
+</script>
+{% endblock %}

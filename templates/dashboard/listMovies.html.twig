@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block title %}List Movies!{% endblock %}
 
+{% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
 <div class="example-wrapper">
-    <h2>Netflix, Inc. is an American streaming platform and entertainment company. 
-        Located in Los Gatos, the company was created in 1997 and a year later began its activity, 
-        offering a DVD rental service through the postal service.</h2>
+    <h1>List Movies ✅</h1>
+
+    {% for list in lists %}
+        {{list}}
+    {% endfor %} 
 </div>
 {% endblock %}

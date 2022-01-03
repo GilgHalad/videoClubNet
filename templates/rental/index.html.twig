@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rental{% endblock %}
+
+{% block body %}
+    <h1>Rental</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Code</th> 
+                <th>State</th>
+                <th>Rental At</th>
+                <th>Return At</th>               
+            </tr>
+        </thead>
+        <tbody>
+        {% for rental in rentals %}
+            <tr>
+                <td>{{ rental.idCopieMovie.idMovie.name }}</td>
+                <td>{{ rental.idCopieMovie.ref }}</td>  
+                <td>{{ rental.idState.Name }}</td> 
+                <td>{{ rental.rentalAt|date('Y-m-d hh:mm')}} </td>     
+                <td>{% if rental.returnAt %} {{ rental.returnAt|date('Y-m-d h:m')}}{% else %}Not Returned yet{% endif %}</td>  
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  
+{% endblock %}
