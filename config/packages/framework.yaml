@@ -16,7 +16,11 @@ framework:
     #fragments: true
     php_errors:
         log: true
-
+        
+    assets:
+            packages:
+                imagenlogo:
+                    base_path: 'images'
 when@test:
     framework:
         test: true
