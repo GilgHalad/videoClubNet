@@ -172,7 +172,7 @@ class RentalController extends AbstractController
     {  
         $status = $entityManager
         ->getRepository(State::class)
-        ->find(2);
+        ->find(3);
 
         $rental = $entityManager
         ->getRepository(Rental::class)
