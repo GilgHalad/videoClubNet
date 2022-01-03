@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rental{% endblock %}
+
+{% block body %}
+    <h1>Rental</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Code</th>                
+            </tr>
+        </thead>
+        <tbody>
+        {% for rental in rentals %}
+            <tr>
+                <td>{{ rental.idCopieMovie.idMovie.name }}</td>
+                <td>{{ rental.idCopieMovie.ref }}</td>
+               
+                <td>              
+                    <a href="{{ path('rental_movie', {'id': rental.id}) }}">Rental Movie</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movies{% endblock %}
+
+{% block body %}
+    <h1>Movies</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th><h3>Name:</h3></th>
+                <td>{{ movie.name }}</td>
+                {% set image = movie.poster %}
+                <img  src="{{ asset("images/posters/"~image~".jpg") }}" alt="image" style="width: 15%">
+            </tr>
+            <tr>
+                <th><h3>Genre:</h3></th>
+                <td>{{ movie.idGenre.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('movies_index') }}">back to list</a>
+
+{% endblock %}

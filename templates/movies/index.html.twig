@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Movies{% endblock %}
+
+{% block body %}
+    <h1>Movies</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Genre</th>
+                {% if is_granted('ROLE_ADMIN') %}  
+                    <th>actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for movie in movies %}
+            <tr>
+                <td>{{ movie.name }}</td>
+                <td>{{ movie.idGenre.name }}</td>               
+                <td>
+                    <a href="{{ path('movies_show', {'id': movie.id}) }}">show</a>
+                    {% if is_granted('ROLE_ADMIN') %}  
+                        <a href="{{ path('movies_edit', {'id': movie.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}  
+        <a href="{{ path('movies_new') }}">Create new</a>
+    {% endif %}
+
+{% endblock %}

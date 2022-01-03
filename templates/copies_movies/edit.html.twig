@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Copiesmovies{% endblock %}
+
+{% block body %}
+    <h1>Edit Copiesmovies</h1>
+
+    {{ include('copies_movies/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('copies_movies_index') }}">back to list</a>
+
+    {{ include('copies_movies/_delete_form.html.twig') }}
+{% endblock %}
