@@ -4,8 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Rental;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
-
+use Doctrine\Persistence\ManagerRegistry;
 /**
  * @method Rental|null find($id, $lockMode = null, $lockVersion = null)
  * @method Rental|null findOneBy(array $criteria, array $orderBy = null)
@@ -22,20 +21,45 @@ class RentalRepository extends ServiceEntityRepository
         parent::__construct($registry, Rental::class);
     }
 
-    public function findByRentalDistinct($user)
-    {
+    public function findAllGroupByIdCopieMovie($idUser)
+    {   
+
+     /*    $query = $this->createQueryBuilder('e')
+       // ->addSelect('e')
+        ->innerJoin('e.idCopieMovie', 'r') 
+        ->addSelect('r')
+        ->select('r')
+        ->where('e.idUser = :parameter') 
+        ->andWhere('e.idState = 3')
+        ->setParameter('parameter', $idUser)
+        ->getQuery();
+        return $query->getResult();
+*/
+        $query = $this->createQueryBuilder('r')
+        ->select(['r'])
+         ->where('r.idUser = :parameter') 
+         ->andWhere('r.idState = 3')
+         ->setParameter('parameter', $idUser)
+         ->getQuery();
+         return $query->getResult();
+
+/*
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT r.ref,mv.name
-                FROM videoclub.rental r
-                INNER JOIN videoclub.copiesmovies cm on cm.id = r.id_copie_movie
-                INNER JOIN videoclub.movies mv on mv.id = cm.id_movie
-                where r.id_state=3 '//and r.id_user='.$user'
+                'SELECT DISTINCT cm , r , mv
+                FROM App:Rental r
+                INNER JOIN App:copiesmovies cm WITH cm.id = r.idCopieMovie
+                INNER JOIN App:Movies mv WITH mv.id = cm.idMovie
+                where r.idState=3'
+                 'SELECT r
+                  FROM App:Rental r
+                  where r.idState=3'
             )
             ->getResult();
-    }
+            ///            ->createQuery('SELECT p FROM AcmeStoreBundle:Product p ORDER BY p.name ASC')
+            */  }
 
-
+    
 
     // /**
     //  * @return Rental[] Returns an array of Rental objects
