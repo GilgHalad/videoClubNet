@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Rental;
 use App\Entity\State;
+use App\Repository\RentalRepository;
 use App\Form\RentalType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,8 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Service\EntityService;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @Route("/rental")
@@ -72,15 +75,36 @@ class RentalController extends AbstractController
     /**
      * @Route("/rental", name="rental", methods={"GET"})
      */
-    public function rental(EntityManagerInterface $entityManager): Response
+    public function rental()
     {
 
-        $userId = $this->security->getUser()->getId();;
+        $userId = $this->security->getUser()->getId();
 
-        $rentals = $entityManager
-            ->getRepository(Rental::class)
-            ->findBy(['idState'=>3,'idUser'=>$userId]);//idState=2 -> unrented  /  idState=1 -> rented
+        $entityManager=$this->getDoctrine()->getManager();
+        $rentals = $entityManager->getRepository(Rental::class)
+                            ->findAllGroupByIdCopieMovie($userId);
 
+        $listRef=[];
+        $rentalsDistinct=[];
+
+
+        foreach ($rentals as $key => $value) {
+            array_push($listRef,$rentals[$key]->getIdCopieMovie()->getRef());
+        }
+        
+        $listRef =array_unique($listRef);
+  
+        foreach ($listRef as $key => $value) {
+            $flag=0;
+            foreach ($rentals as $key2 => $value2) {
+                if ($rentals[$key2]->getIdCopieMovie()->getRef() == $listRef[$key]){
+                    if($flag == 1){
+                        unset($rentals[$key2]);                        
+                    }
+                    $flag=1;
+                }
+            }
+        }
             return $this->render('rental/actionRental.html.twig', [
             'rentals' => $rentals,
         ]);

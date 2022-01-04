@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Rental
  *
  * @ORM\Table(name="rental", indexes={@ORM\Index(name="rental_FK_user", columns={"id_user"}), @ORM\Index(name="rental_FK_copiesMovies", columns={"id_copie_movie"}), @ORM\Index(name="rental_FK_user", columns={"id_user"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\RentalRepository")
  */
 
 class Rental
@@ -128,7 +128,5 @@ class Rental
 
         return $this;
     }
-
-    
 
 }
