@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Copies movies{% endblock %}
+
+{% block body %}
+    <h1>Copies movies</h1>
+
+
+    <h3>The movie with more copies is:  {{ resultCountCopies[0].idmovie.name }}. It have {{resultCountCopies|length }} copies</h3>
+
+
+    <h1>   List of all copies movies</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ref</th>
+                <th>Movie</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for copiesmovie in copiesmovies %}
+            <tr>
+                <td>{{ copiesmovie.id }}</td>
+                <td>{{ copiesmovie.ref }}</td>
+                <td>{{ copiesmovie.idmovie.name }}</td>  
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Create a new copy of a movie</p>
+    <p>'Ref' must be unique</p>
+
+    <a href="{{ path('copies_movies_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Copiesmovies{% endblock %}
+
+{% block body %}
+    <h1>Copiesmovies</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ copiesmovie.id }}</td>
+            </tr>
+            <tr>
+                <th>Movie</th>
+                <td>{{ copiesmovie.idMovie.name }}</td>
+            </tr>
+            <tr>
+                <th>Ref</th>
+                <td>{{ copiesmovie.ref }}</td>
+            </tr>
+            <tr>
+                <th>IdState</th>
+                <td>{{ copiesmovie.idState }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('copies_movies_index') }}">back to list</a>
+
+    <a href="{{ path('copies_movies_edit', {'id': copiesmovie.id}) }}">edit</a>
+
+    {{ include('copies_movies/_delete_form.html.twig') }}
+{% endblock %}

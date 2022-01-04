@@ -1,0 +1,33 @@
+{% if app.user %}
+
+    <div style="padding: 5px; margin: 5px; text-align: right;" id="header-logout-div">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+    <div style="padding: 5px; margin: 5px; text-align: left">
+        <a href={{ path('dashboard') }} >
+            <img  src="{{ asset('logo.png', 'imagenlogo') }}" }} alt="logo" style="width: 17%"/>
+        </a>
+    </div>
+    
+    <div style="border: 1px solid black; padding: 5px; margin: 5px; text-align: center;" id="header-nav-div">
+
+        <nav id ="menu" class="navigation" role="navigation">
+        
+            {% if is_granted('ROLE_USER') %}  
+
+                <a href={{ path('movies_index') }}>List Movies</a>
+                <a href={{ path('rental') }}>Rental</a>
+                <a href={{ path('unrental') }}>Unrental</a>
+            {% endif %}
+    
+            {% if is_granted('ROLE_ADMIN') %}  
+
+            <a href={{ path('listUser') }}>List Users</a>
+            <a href={{ path('listRental') }}>List Rental</a>
+            <a href={{ path('copies_movies_index') }}>BackOffice</a>
+            {% endif %}
+
+        </nav>
+
+    </div>
+{% endif %}

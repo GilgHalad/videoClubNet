@@ -66,5 +66,5 @@ class Copiesmovies
         return $this;
     }
 
-    
+
 }
