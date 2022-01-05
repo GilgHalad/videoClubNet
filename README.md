@@ -17,4 +17,4 @@ php -S localhost:8000 -t public
 BD MYSQL 127.0.0.1 videoclub  User: root  Pass: root
 Usuarios logueados:
 admin@prueba.com  -> pass: 123
-admin@prueba.com  -> pass: 123
+user@prueba.com  -> pass: 123
